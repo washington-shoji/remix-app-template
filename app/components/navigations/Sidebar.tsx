@@ -1,41 +1,26 @@
 import { Form, Link } from '@remix-run/react';
+import { useState } from 'react';
 
-export function Sidebar() {
+interface SidebarProps {
+  isOpen: boolean;
+}
+
+type OpenDropdown = 'pages' | 'sales' | 'authentication' | null;
+
+export function Sidebar({ isOpen }: SidebarProps) {
+    const [openDropdown, setOpenDropdown] = useState<OpenDropdown>(null);
+
+    const handleDropdownClick = (dropdown: OpenDropdown) => {
+      setOpenDropdown(openDropdown === dropdown ? null : dropdown);
+    };
+
     return (
         <aside
-        className="fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+        className={`fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform ${!isOpen ? '-translate-x-full' : 'translate-x-0'} bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
         aria-label="Sidenav"
         id="drawer-navigation"
       >
         <div className="overflow-y-auto py-5 px-3 h-full bg-white dark:bg-gray-800">
-          <form action="#" method="GET" className="md:hidden mb-2">
-            <label htmlFor="sidebar-search" className="sr-only">Search</label>
-            <div className="relative">
-              <div
-                className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
-              >
-                <svg
-                  className="w-5 h-5 text-gray-500 dark:text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                  ></path>
-                </svg>
-              </div>
-              <input
-                type="text"
-                name="search"
-                id="sidebar-search"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="Search"
-              />
-            </div>
-          </form>
           <ul className="space-y-2">
             <li>
               <Link
@@ -58,9 +43,10 @@ export function Sidebar() {
             <li>
               <button
                 type="button"
+                onClick={() => handleDropdownClick('pages')}
                 className="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                 aria-controls="dropdown-pages"
-                data-collapse-toggle="dropdown-pages"
+                aria-expanded={openDropdown === 'pages'}
               >
                 <svg
                   aria-hidden="true"
@@ -78,7 +64,7 @@ export function Sidebar() {
                 <span className="flex-1 ml-3 text-left whitespace-nowrap">Pages</span>
                 <svg
                   aria-hidden="true"
-                  className="w-6 h-6"
+                  className={`w-6 h-6 transition-transform duration-200 ${openDropdown === 'pages' ? 'transform rotate-180' : ''}`}
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -90,33 +76,34 @@ export function Sidebar() {
                   ></path>
                 </svg>
               </button>
-              <ul id="dropdown-pages" className="hidden py-2 space-y-2">
+              <ul id="dropdown-pages" className={`${openDropdown === 'pages' ? '' : 'hidden'} py-2 space-y-2`}>
                 <li>
                   <Link
                     to="/settings"
                     className="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    >Settings</Link>
+                  >Settings</Link>
                 </li>
                 <li>
                   <Link
                     to="/kanban"
                     className="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    >Kanban</Link>
+                  >Kanban</Link>
                 </li>
                 <li>
                   <Link
                     to="/calendar"
                     className="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    >Calendar</Link>
+                  >Calendar</Link>
                 </li>
               </ul>
             </li>
             <li>
               <button
                 type="button"
+                onClick={() => handleDropdownClick('sales')}
                 className="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                 aria-controls="dropdown-sales"
-                data-collapse-toggle="dropdown-sales"
+                aria-expanded={openDropdown === 'sales'}
               >
                 <svg
                   aria-hidden="true"
@@ -131,11 +118,10 @@ export function Sidebar() {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-                <span className="flex-1 ml-3 text-left whitespace-nowrap"
-                  >Sales</span>
+                <span className="flex-1 ml-3 text-left whitespace-nowrap">Sales</span>
                 <svg
                   aria-hidden="true"
-                  className="w-6 h-6"
+                  className={`w-6 h-6 transition-transform duration-200 ${openDropdown === 'sales' ? 'transform rotate-180' : ''}`}
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -147,24 +133,24 @@ export function Sidebar() {
                   ></path>
                 </svg>
               </button>
-              <ul id="dropdown-sales" className="hidden py-2 space-y-2">
+              <ul id="dropdown-sales" className={`${openDropdown === 'sales' ? '' : 'hidden'} py-2 space-y-2`}>
                 <li>
                   <Link
                     to="/products"
                     className="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    >Products</Link>
+                  >Products</Link>
                 </li>
                 <li>
                   <Link
                     to="/billing"
                     className="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    >Billing</Link>
+                  >Billing</Link>
                 </li>
                 <li>
                   <Link
                     to="/invoice"
                     className="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    >Invoice</Link>
+                  >Invoice</Link>
                 </li>
               </ul>
             </li>
@@ -198,9 +184,10 @@ export function Sidebar() {
             <li>
               <button
                 type="button"
+                onClick={() => handleDropdownClick('authentication')}
                 className="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                 aria-controls="dropdown-authentication"
-                data-collapse-toggle="dropdown-authentication"
+                aria-expanded={openDropdown === 'authentication'}
               >
                 <svg
                   aria-hidden="true"
@@ -215,11 +202,10 @@ export function Sidebar() {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-                <span className="flex-1 ml-3 text-left whitespace-nowrap"
-                  >Authentication</span>
+                <span className="flex-1 ml-3 text-left whitespace-nowrap">Authentication</span>
                 <svg
                   aria-hidden="true"
-                  className="w-6 h-6"
+                  className={`w-6 h-6 transition-transform duration-200 ${openDropdown === 'authentication' ? 'transform rotate-180' : ''}`}
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -231,24 +217,24 @@ export function Sidebar() {
                   ></path>
                 </svg>
               </button>
-              <ul id="dropdown-authentication" className="hidden py-2 space-y-2">
+              <ul id="dropdown-authentication" className={`${openDropdown === 'authentication' ? '' : 'hidden'} py-2 space-y-2`}>
                 <li>
                   <Link
                     to="/login"
                     className="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    >Sign In</Link>
+                  >Sign In</Link>
                 </li>
                 <li>
                   <Link
                     to="/register"
                     className="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    >Sign Up</Link>
+                  >Sign Up</Link>
                 </li>
                 <li>
                   <Link
                     to="/forgot-password"
                     className="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    >Forgot Password</Link>
+                  >Forgot Password</Link>
                 </li>
               </ul>
             </li>

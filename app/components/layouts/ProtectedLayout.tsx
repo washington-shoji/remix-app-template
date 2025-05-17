@@ -1,6 +1,6 @@
 import { Navbar } from '../navigations/Navbar';
 import { useNavigate } from '@remix-run/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Sidebar } from '../navigations/Sidebar';
 import { SideTopNavbar } from '../navigations/SideTopNavbar';
 
@@ -11,6 +11,7 @@ interface ProtectedLayoutProps {
 
 export function ProtectedLayout({ children, isAuthenticated }: ProtectedLayoutProps) {
   const navigate = useNavigate();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -25,9 +26,12 @@ export function ProtectedLayout({ children, isAuthenticated }: ProtectedLayoutPr
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="flex">
-        <SideTopNavbar/>
+        <SideTopNavbar 
+          isSidebarOpen={isSidebarOpen} 
+          onSidebarToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+        />
         {/* Sidebar */}
-        <Sidebar />
+        <Sidebar isOpen={isSidebarOpen} />
 
         {/* Main content */}
         <main className="p-4 md:ml-64 w-full h-auto pt-20">
