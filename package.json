@@ -1,5 +1,5 @@
 {
-  "name": "remix-app-template",
+  "name": "remix-web-app-crud-template",
   "private": true,
   "sideEffects": false,
   "type": "module",

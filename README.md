@@ -1,4 +1,4 @@
-# Remix CRUD Template
+# Remix Wep App CRUD Template
 
 A modern Remix starter template showcasing CRUD operations with comprehensive testing using Vitest. This template provides a solid foundation for building full-stack web applications with TypeScript, Tailwind CSS, and best practices for testing.
 
