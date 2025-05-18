@@ -21,41 +21,41 @@ export default function DashboardPage() {
 
       {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-lg shadow p-6 dark:bg-gray-800">
           <div className="flex items-center justify-between">
-            <h3 className="text-gray-500 text-sm font-medium">Total Projects</h3>
+            <h3 className="text-gray-500 text-sm font-medium dark:text-white">Total Projects</h3>
             <span className="text-indigo-600 bg-indigo-100 px-2 py-1 rounded-full text-xs">
               +12.5%
             </span>
           </div>
-          <p className="text-3xl font-semibold text-gray-900 mt-2">24</p>
+          <p className="text-3xl font-semibold text-gray-900 dark:text-white mt-2">24</p>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-lg shadow p-6 dark:bg-gray-800">
           <div className="flex items-center justify-between">
-            <h3 className="text-gray-500 text-sm font-medium">Active Tasks</h3>
+            <h3 className="text-gray-500 text-sm font-medium dark:text-white">Active Tasks</h3>
             <span className="text-green-600 bg-green-100 px-2 py-1 rounded-full text-xs">
               +8.2%
             </span>
           </div>
-          <p className="text-3xl font-semibold text-gray-900 mt-2">156</p>
+          <p className="text-3xl font-semibold text-gray-900 dark:text-white mt-2">156</p>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-lg shadow p-6 dark:bg-gray-800">
           <div className="flex items-center justify-between">
-            <h3 className="text-gray-500 text-sm font-medium">Team Members</h3>
+            <h3 className="text-gray-500 text-sm font-medium dark:text-white">Team Members</h3>
             <span className="text-indigo-600 bg-indigo-100 px-2 py-1 rounded-full text-xs">
               +4.0%
             </span>
           </div>
-          <p className="text-3xl font-semibold text-gray-900 mt-2">12</p>
+          <p className="text-3xl font-semibold text-gray-900 dark:text-white mt-2">12</p>
         </div>
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-white rounded-lg shadow">
+      <div className="bg-white rounded-lg shadow dark:bg-gray-800">
         <div className="p-6">
-          <h2 className="text-lg font-medium text-gray-900">Recent Activity</h2>
+          <h2 className="text-lg font-medium text-gray-900 dark:text-white">Recent Activity</h2>
           <div className="mt-6 space-y-4">
             {[1, 2, 3].map((item) => (
               <div key={item} className="flex items-center space-x-4 py-3 border-b last:border-0">
@@ -67,10 +67,10 @@ export default function DashboardPage() {
                   </div>
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-900">New project created</p>
-                  <p className="text-sm text-gray-500">Project XYZ was created by John Doe</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">New project created</p>
+                  <p className="text-sm text-gray-500 dark:text-white">Project XYZ was created by John Doe</p>
                 </div>
-                <div className="text-sm text-gray-500">2h ago</div>
+                <div className="text-sm text-gray-500 dark:text-white">2h ago</div>
               </div>
             ))}
           </div>

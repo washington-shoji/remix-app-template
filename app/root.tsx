@@ -13,9 +13,11 @@ import { json } from '@remix-run/node';
 import { PublicLayout } from './components/layouts/PublicLayout';
 import { ProtectedLayout } from './components/layouts/ProtectedLayout';
 import { AuthProvider } from './utils/auth.context';
+import { ThemeProvider } from './utils/theme.context';
 import { getUserId } from './utils/session.server';
 
 import './tailwind.css';
+import './utils/theme-init.client';
 
 export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -48,7 +50,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 function Document({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -74,17 +76,19 @@ export default function App() {
 
   return (
     <Document>
-      <AuthProvider initialState={{ isAuthenticated, user }}>
-        {isProtectedRoute ? (
-          <ProtectedLayout isAuthenticated={isAuthenticated}>
-            <Outlet />
-          </ProtectedLayout>
-        ) : (
-          <PublicLayout>
-            <Outlet />
-          </PublicLayout>
-        )}
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider initialState={{ isAuthenticated, user }}>
+          {isProtectedRoute ? (
+            <ProtectedLayout isAuthenticated={isAuthenticated}>
+              <Outlet />
+            </ProtectedLayout>
+          ) : (
+            <PublicLayout>
+              <Outlet />
+            </PublicLayout>
+          )}
+        </AuthProvider>
+      </ThemeProvider>
     </Document>
   );
 }

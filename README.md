@@ -10,9 +10,39 @@ A modern Remix starter template showcasing CRUD operations with comprehensive te
 - 🧪 Testing with [Vitest](https://vitest.dev/)
 - 🎯 Example CRUD operations using [JSONPlaceholder API](https://jsonplaceholder.typicode.com/)
 - 🔒 Type-safe API interactions
-- 🌙 Dark mode support
+- 🌙 Dark mode with system preference detection and persistence
 - 🧩 Modular service layer architecture
 - 🔐 Basic authentication setup
+
+## Theme System
+
+The template includes a robust theme system with the following features:
+
+### Features
+- 🎨 Light and dark mode support
+- 🔄 Automatic system preference detection
+- 💾 Theme persistence in localStorage
+- ⚡ Flash prevention on page load
+- 🎯 Consistent theme across page navigations
+- 📱 Responsive theme toggle in both public and authenticated layouts
+
+### Implementation
+- Uses React Context for theme state management
+- Pre-hydration script to prevent theme flash
+- Tailwind CSS for theme-aware styling
+- TypeScript for type-safe theme handling
+- Accessible theme toggle with keyboard support
+- System preference media query listener
+
+### Usage
+The theme toggle is available in:
+- Public layout: Top navigation bar
+- Authenticated layout: Side top navigation bar
+
+Theme preferences are:
+1. Persisted in localStorage
+2. Synced with system preferences when not explicitly set
+3. Maintained across page refreshes and navigation
 
 ## Authentication
 
