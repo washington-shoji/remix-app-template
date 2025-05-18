@@ -5,7 +5,7 @@ interface SidebarProps {
   isOpen: boolean;
 }
 
-type OpenDropdown = 'pages' | 'sales' | 'authentication' | null;
+type OpenDropdown = 'examples' | 'pages' | 'sales' | 'authentication' | null;
 
 export function Sidebar({ isOpen }: SidebarProps) {
     const [openDropdown, setOpenDropdown] = useState<OpenDropdown>(null);
@@ -41,9 +41,12 @@ export function Sidebar({ isOpen }: SidebarProps) {
               </Link>
             </li>
             <li>
-              <Link
-                to="/dashboard/example"
-                className="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              <button
+                type="button"
+                onClick={() => handleDropdownClick('examples')}
+                className="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                aria-controls="dropdown-examples"
+                aria-expanded={openDropdown === 'examples'}
               >
                 <svg className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" 
                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
@@ -53,8 +56,47 @@ export function Sidebar({ isOpen }: SidebarProps) {
                   <path d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" clipRule="evenodd"/>
                 </svg>
 
-                <span className="ml-3">API Example GET</span>
-              </Link>
+                <span className="flex-1 ml-3 text-left whitespace-nowrap">API Examples</span>
+                <svg
+                  aria-hidden="true"
+                  className={`w-6 h-6 transition-transform duration-200 ${openDropdown === 'examples' ? 'transform rotate-180' : ''}`}
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+              </button>
+              <ul id="dropdown-examples" className={`${openDropdown === 'examples' ? '' : 'hidden'} py-2 space-y-2`}>
+                <li>
+                  <Link
+                    to="/dashboard/example-get"
+                    className="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                  >API Example GET</Link>
+                </li>
+                <li>
+                  <Link
+                    to="/dashboard/example-post"
+                    className="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                  >API Example POST</Link>
+                </li>
+                <li>
+                  <Link
+                    to="/dashboard/example-put"
+                    className="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                  >API Example PUT</Link>
+                </li>
+                <li>
+                  <Link
+                    to="/dashboard/example-delete"
+                    className="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                  >API Example DELETE</Link>
+                </li>
+              </ul>
             </li>
             <li>
               <button

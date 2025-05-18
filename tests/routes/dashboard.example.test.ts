@@ -1,5 +1,5 @@
 import { test, expect, describe, vi, beforeEach } from 'vitest';
-import { loader } from '../../app/routes/dashboard.example';
+import { loader } from '../../app/routes/dashboard.example-get';
 import * as pokemonService from '../../app/services/pokemon.server';
 
 /**
@@ -75,7 +75,7 @@ describe('Dashboard Example Route', () => {
     vi.mocked(pokemonService.getPokemonDetails).mockResolvedValue(mockPokemonDetails);
 
     // Create mock request
-    const request = new Request('http://example.com/dashboard/example?page=1');
+    const request = new Request('http://example.com/dashboard/example-get?page=1');
 
     // Call loader
     const response = await loader({ request, context: {}, params: {} });
@@ -103,7 +103,7 @@ describe('Dashboard Example Route', () => {
     vi.mocked(pokemonService.getPokemonDetails).mockResolvedValue(mockPokemonDetails2);
 
     // Create mock request with selected Pokemon
-    const request = new Request('http://example.com/dashboard/example?page=1&pokemon=2');
+    const request = new Request('http://example.com/dashboard/example-get?page=1&pokemon=2');
 
     // Call loader
     const response = await loader({ request, context: {}, params: {} });
@@ -120,7 +120,7 @@ describe('Dashboard Example Route', () => {
     vi.mocked(pokemonService.getPokemonDetails).mockResolvedValue(mockPokemonDetails);
 
     // Test page 2 with selected Pokemon
-    const request = new Request('http://example.com/dashboard/example?page=2&pokemon=1');
+    const request = new Request('http://example.com/dashboard/example-get?page=2&pokemon=1');
     const response = await loader({ request, context: {}, params: {} });
     const data = await response.json();
 

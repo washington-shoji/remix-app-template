@@ -57,7 +57,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
  * 4. Pagination
  * 5. Responsive design
  */
-export default function DashboardExample() {
+export default function DashboardExampleGet() {
   const {
     pokemonList,
     featuredPokemon,
