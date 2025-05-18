@@ -24,7 +24,7 @@ export function Sidebar({ isOpen }: SidebarProps) {
           <ul className="space-y-2">
             <li>
               <Link
-                to="/overview"
+                to="/dashboard"
                 className="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg
@@ -38,6 +38,22 @@ export function Sidebar({ isOpen }: SidebarProps) {
                   <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
                 </svg>
                 <span className="ml-3">Overview</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard/example"
+                className="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <svg className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" 
+                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
+                  fill="currentColor" 
+                  viewBox="0 0 24 24">
+                  <path d="M13 11.15V4a1 1 0 1 0-2 0v7.15L8.78 8.374a1 1 0 1 0-1.56 1.25l4 5a1 1 0 0 0 1.56 0l4-5a1 1 0 1 0-1.56-1.25L13 11.15Z" clipRule="evenodd"/>
+                  <path d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" clipRule="evenodd"/>
+                </svg>
+
+                <span className="ml-3">API Example GET</span>
               </Link>
             </li>
             <li>
